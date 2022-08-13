@@ -1,0 +1,310 @@
+<?R
+
+###############################################################################################################################
+
+# The next 10 command lines (after the comments here) need to be filled in to
+# define the geometry of the contricted capillary, the solid-liquid contact angle
+# in degrees, and various other aspect of the simulation.
+# Note 1. nz will be set to the same value as ny some lines of code further below.
+# Note 2. ContactAngleDegrees should be from 0 to less than 90.
+# Note 3. The capillary's uncontricted internal diameter is assumed to be 0.97mm.
+#
+# There are some other values that need to be filled in shortly after the line: # Prepare the .xml file.
+# Some of those may be shifted up to here at a later stage. dx.offset.wetting = 208 or 304 for forward or reverese at nx = 512 and ny = 32.
+
+nx <- 512
+ny <- 48
+totalTime <- 200000
+rampTime  <-  10000
+averageVelocity <- 3600e-6
+ContactAngleDegrees <- 0
+noChannelInlet  <- 0
+noChannelOutlet <- 0
+dx.offset.wetting <- 180 
+west.wet.space.mm <- 0.125 # not sure if this is needed
+
+sample.iterations <- 1000
+
+mapped.value <- 0 # mapped = false if mapped.value = 0 or if mapped no set
+
+
+
+###############################################################################################################################
+
+# The next bits won't change very frequently for now.
+
+# These next bits (file prefixes) won't change often. The first is a prefix for the .xml file. The second is 
+# a prefix for output. 
+xml.filename.prefix <- "constrictedCapillary"
+output.path.prefix <- "/scratch/eait/uqilenan/"
+
+s.dy <- ny/2
+s.dz <- s.dy
+
+
+s.dx.1 <- ny
+s.dx.2 <- ny + ny/2
+s.dx.3 <- ny + ny
+
+s.dx.4 <- nx/2 - ny/2
+s.dx.5 <- nx/2
+s.dx.6 <- nx/2 + ny/2
+
+s.dx.7 <- nx - 2*ny
+s.dx.8 <- nx - 1.5*ny
+s.dx.9 <- nx - ny
+
+
+
+
+###############################################################################################################################
+
+# Old command lines replace below
+# # Create a velocityRamp.csv file 
+# velocityRamp <- data.frame( time    =seq(1, totalTime),
+#             velocity=c(seq(from=0,to=averageVelocity,by=averageVelocity/(rampTime-1)),rep(averageVelocity,totalTime-rampTime)))
+# write.csv(velocityRamp,"velocityRamp.csv", row.names = FALSE)
+
+# New command lines to create a file with just the ramp velocities.
+# Create a velocityRamp.csv file
+velocityRamp <- data.frame( time    =seq(1, rampTime),
+            velocity=c(seq(from=0,to=averageVelocity,by=averageVelocity/(rampTime-1))))
+write.csv(velocityRamp,"velocityRamp.csv", row.names = FALSE)
+
+
+# Make time stamp character string.
+
+char.timestamp <- gsub("-", "", Sys.time())
+char.timestamp <- gsub(":", "", char.timestamp)
+char.timestamp <- gsub(" ", "-Time", char.timestamp)
+char.timestamp <- paste0("MadeDate", char.timestamp)
+
+
+# Create a descriptive name for the .xml file.
+
+# xml.filename.suffix <- paste0("_CA", as.character(ContactAngleDegrees), "_aveUx", as.character(averageVelocity))
+# xml.filename.suffix <- paste0(xml.filename.suffix, "_nx", nx, "_ny", ny, "_dxWetting", dx.offset.wetting, char.timestamp, ".xml")
+#
+xml.filename.suffix <- ".xml"
+xml.filename <- paste0(xml.filename.prefix, xml.filename.suffix)
+
+# Create a descriptive pathname for the output and create that path if it does not exit.
+
+
+output.path.suffix <- "TCLB_Output/contrictedCapillary/"
+output.path.suffix <- paste0(output.path.suffix, "CA", ContactAngleDegrees, "_aveUx", as.character(averageVelocity), "_dxWetting", dx.offset.wetting)
+output.path.suffix <- paste0(output.path.suffix, "_nx", nx, "_ny", ny, "/")
+output.path.suffix <- paste0(output.path.suffix, char.timestamp, "/")
+output.path <- paste0(output.path.prefix, output.path.suffix)
+dir.create(output.path, recursive = TRUE)
+
+
+# Define some additional variables.
+# Note 1. x.mm, y.mm, z.mm, and SphereRadius.mm described the centre and readius
+#         of a sphere that will be filled with the low density fluid (gas) at
+#         initiation of the model.
+# Note 2. mmgauge is the conversion factor from millimeter to latice units.
+# Note 3. mmpsgauge is the conversion factor from millimeter per second to latice units.
+ 
+nz <- ny
+mmgauge <- ny-1 
+# micro.m2ps.gauge <-  0.001*3600e-6/abs(averageVelocity)
+
+# SphereRadius.mm <- 0.97/2/cos(ContactAngleDegrees/180*pi)
+# x.mm <- noChannelInlet/mmgauge + west.wet.space.mm + SphereRadius.mm
+# y.mm <- 0.5
+# z.mm <- 0.5 
+# nx.wet <- floor(x.mm*mmgauge) 
+
+sample.dx.mm <- seq(noChannelInlet, nx-noChannelOutlet, length.out = 29)/mmgauge 
+centre.dy.mm <- (ny-1)*0.5/mmgauge
+centre.dz.mm <- (nz-1)*0.5/mmgauge
+
+
+# Define functions.
+
+tube.radius.values <- function(x, end.diameter = 0.97, restricted.diameter = 0.26, x.center.restriction = 0, restriction.width = 3) {
+  ans <- rep(end.diameter, length(x))
+  restriction.index <- (1:length(x))[abs(x - x.center.restriction) < restriction.width/2]
+  u <- (x[restriction.index] - x.center.restriction)/restriction.width*2*pi
+  u <- (end.diameter - restricted.diameter)*(1+cos(u))/2
+  ans[restriction.index] <- ans[restriction.index] - u
+  ans <- ans/2
+  return(ans)
+}
+make.restricted.capillary <- function(nx, ny, nz, mmgauge,noChannelInlet=0,noChannelOutlet=0) {
+  # Centre the lattice coordinates and convert lattice units to mm. 
+  x.values <- (1:nx - (nx+1)/2)  / mmgauge
+  y.values <- (1:ny - (ny+1)/2 ) / mmgauge
+  z.values <- (1:nz - (nz+1)/2)  / mmgauge  
+  x.tube.radius <- tube.radius.values(x.values)
+  ar <- array(rep(0,nx*ny*nz), c(nx,ny,nz))
+  for (i in 1:ny) { for (j in 1:nz) {
+      material.radius <- sqrt(y.values[i]^2 + z.values[j]^2)
+      ar[x.tube.radius <= material.radius,i,j] <- 1
+  }  }
+  if (noChannelInlet > 0) {
+    for (xx in 1:noChannelInlet) {for (i in 1:ny) { for (j in 1:nz) {
+      ar[xx,i,j] <- 0
+    }}}
+  }
+  if (noChannelOutlet > 0) {
+    for (xx in (nx-noChannelInlet):nx) {for (i in 1:ny) { for (j in 1:nz) {
+      ar[xx,i,j] <- 0
+    }}}
+  }
+  return(ar)
+}
+make.wet.interior <- function(ar, dx, ContactAngleDegrees, mmgauge) {  
+  wet.ar <- ar
+  wet.ar[ar == 0] <- 1
+  dim.ar <- dim(ar)
+  x.values <- 0:(dim.ar[1]-1)/mmgauge
+  y.values <- 0:(dim.ar[2]-1)/mmgauge
+  y.values <- y.values - mean(y.values)
+  z.values <- 0:(dim.ar[3]-1)/mmgauge
+  z.values <- z.values - mean(z.values)
+  SphereRadius.mm <- 0.97/2/cos(ContactAngleDegrees/180*pi)
+  x.mm <- (dx-1)/mmgauge + SphereRadius.mm
+  y.mm <- 0
+  z.mm <- 0
+  for (i in 1:dim.ar[1]) {
+    for (j in 1:dim.ar[2]) {
+      for (k in 1:dim.ar[2]) {
+        material.radius <- sqrt((x.values[i]-x.mm)^2 + (y.values[j]-y.mm)^2 + (z.values[k]-z.mm)^2)
+        if (material.radius <= SphereRadius.mm | x.values[i] >= x.mm) {
+          wet.ar[i,j,k] <- 0
+        }
+      }
+    }
+  }
+  wet.ar[ar == 1] <- 0
+  return(wet.ar) 
+}
+write.ar.dat <- function(ar, filename = "ar.dat") {
+  nx <- dim(ar)[1]
+  write.table(as.matrix(ar[1,,]), file = filename, col.names = FALSE, row.names = FALSE, sep = " ")
+  for (i in 2:nx) {
+    write.table(as.matrix(ar[i,,]), file = filename, col.names = FALSE, row.names = FALSE, append = TRUE, sep = " ")
+  }
+}
+
+
+# Use functions defined above to prepare the .dat file describing the contricted capillary's geometry.
+ar.constricted <- make.restricted.capillary(nx, ny, nz, mmgauge, noChannelInlet = noChannelInlet, noChannelOutlet = noChannelOutlet)
+ar.contricted.wetParts <- make.wet.interior(ar.constricted, noChannelInlet + dx.offset.wetting, ContactAngleDegrees, mmgauge)
+write.ar.dat(ar.constricted, filename = "constricted.dat")
+write.ar.dat(ar.contricted.wetParts, filename = "constrictedWetParts.dat")
+
+# Write all of the helper files to the output.path as well.
+write.csv(velocityRamp, paste0(output.path, "velocityRamp.csv"), row.names = FALSE)
+write.ar.dat(ar.constricted, filename = paste0(output.path, "constricted.dat"))
+write.ar.dat(ar.contricted.wetParts, filename = paste0(output.path, "constrictedWetParts.dat"))
+
+
+
+# Prepare the .xml file.
+xml <- xml.filename
+print(xml)
+sink(xml)
+?><?xml version="1.0"?>
+<CLBConfig version="2.0" output="<?%s output.path ?>" permissive="true">
+	<Units>
+		<Param name="resolution" value="0.97mm" gauge="<?%.0f mmgauge ?>"/>
+		<Param name="nu" value="1e-6m2/s" gauge="0.001"/>     
+		<Param name="rho" value="997kg/m3" gauge="1"/>
+	</Units>
+	<Geometry nx="<?%.0f nx ?>" ny="<?%.0f ny ?>" nz="<?%.0f nz ?>">
+		<MRT><Box /></MRT>
+		<None name="wetting">
+                        <Text file="./constrictedWetParts.dat" />
+		</None>
+                <WVelocity name="inlet">
+                        <Box nx="5" />
+                </WVelocity>
+                <EVelocity name="outlet">
+                        <Box dx="-5" />
+                </EVelocity>
+
+		<Smoothing><Box/></Smoothing>
+		<Wall mask="ALL">
+		    <Text file="./constricted.dat" />
+        	</Wall>
+	</Geometry>
+	<Model>
+                        <Param name="mapped" value ="<?%.0f mapped.value ?>"/>
+		<Param name="Density_h" value="997kg/m3" />
+		<Param name="Density_l" value="1.184kg/m3" />
+		<Param name="Viscosity_h" value="8.917e-7m2/s" />
+		<Param name="Viscosity_l" value="1.552e-5m2/s" />
+		<Param name="PhaseField_h" value="1" />
+		<Param name="PhaseField_l" value="0" />
+		<Param name="PhaseField" value="0" />
+		<Param name="PhaseField" value="1" zone="wetting" />
+		<Param name="PhaseField" value="0" zone="outlet" />
+		<Param name="PhaseField" value="1" zone="inlet" />
+		<Param name="Uavg" value="0m/s" />
+		<Param name="Uavg" value="0m/s" zone="inlet" />
+		<Param name="developedPipeFlow_X" value="1"/>
+		<Param name="pipeRadius"   value="<?%.0f ny/2 ?>"/>
+		<Param name="pipeCentre_Y" value="<?%.0f ny/2 ?>"/>
+		<Param name="pipeCentre_Z" value="<?%.0f ny/2 ?>"/>
+		<Param name="Pressure" value="0Pa" />
+		<Param name="Pressure" value="-100Pa" zone = "wetting"/>
+		<Param name="M" value="0.1" />
+		<Param name="IntWidth" value="5" />
+		<Param name="sigma" value="72e-3kg/s2" />
+		<Param name="radAngle" value="<?%.0f ContactAngleDegrees ?>d" />
+	</Model>
+	<Sample Iterations="<?%.0f sample.iterations ?>" what="P"> 
+	        <Point dx="<?%.0f s.dx.1 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.2 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.3 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.4 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.5 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.6 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.7 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.8 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	        <Point dx="<?%.0f s.dx.9 ?>" dy="<?%.0f s.dy ?>" dz="<?%.0f s.dz ?>"/> 
+	</Sample> 
+	<Solve Iterations="5"/>
+	<VTK />
+	<Geometry>
+		<None mask="ADDITIONALS"><Box/>
+		</None>
+	</Geometry>
+	<VTK />
+
+	<!-- <Control Iterations="<?%.0f totalTime ?>">
+		<CSV file="./velocityRamp.csv" Time="time*1">
+			<Param name="Uavg" value="velocity*1m/s" zone="inlet"/>
+                                    <Param name="Uavg" value="-velocity*1m/s" zone="outlet"/>
+
+		</CSV>
+	</Control>
+	<Solve Iterations="<?%.0f totalTime ?>">
+		<Failcheck Iterations="<?%.0f totalTime*0.01 ?>" />
+		<VTK Iterations="<?%.0f totalTime / 20 ?>"/>
+	</Solve>  -->
+
+
+	<Control Iterations="<?%.0f rampTime ?>">
+        	<CSV file="./velocityRamp.csv" Time="time*1">
+           		<Param name="Uavg" value="velocity*1m/s" zone="inlet"/>
+        	</CSV>
+	</Control>
+    	<Solve Iterations="<?%.0f rampTime ?>">
+        	<Failcheck Iterations="<?%.0f rampTime*0.1 ?>" />
+        	<VTK Iterations="<?%.0f rampTime ?>"/>
+    	</Solve>
+    	<Param name="Uavg" value="3600e-6m/s"/>
+    	<Solve Iterations="<?%.0f totalTime ?>">
+        	<Failcheck Iterations="<?%.0f totalTime*0.01 ?>" />
+        	<VTK Iterations="<?%.0f totalTime/20 ?>"/>
+    	</Solve>
+
+</CLBConfig>
+<?R
+sink()
+detach()
+?>
