@@ -1,0 +1,203 @@
+running on:
+gpunode-0-16
+Tue Oct 12 09:54:21 AEST 2021
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              gpunode-0-16
+  Local adapter:           mlx5_0
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpunode-0-16
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+MPMD: TCLB: local:0/1 work:0/1 ---  connected to:
+[  ]    #### : -------------------------------------------------------------------------
+[  ]    #### : -  CLB version:        v6.5.0-96-g2cb4905                               -
+[  ]    #### : -        Model: d3q27_pf_velocity_q27_OutFlow                               -
+[  ]    #### : -------------------------------------------------------------------------
+[  ]    #### : Setting output path to: constrictedChannel
+[ 0]    ---- : Selecting device 0/1
+[ 0] warning ! Disambiguous unit: "mm". Interpreting "m" as "mili"
+[  ]    ---- : /---------------[ GAUGE ]-----------------
+[  ]    ---- : |  0.001 [ m^2 s^-1 kg^0 K^0 x^0 y^0 z^0 A^0 t^0 ]
+[  ]    ---- : |  3.12903e-05 [ m^1 s^0 kg^0 K^0 x^0 y^0 z^0 A^0 t^0 ]
+[  ]    ---- : |  997 [ m^-3 s^0 kg^1 K^0 x^0 y^0 z^0 A^0 t^0 ]
+[  ]    ---- : ------------------------------------------
+[  ]    ---- : | 1 m = 31958.762887 units
+[  ]    ---- : | 1 s = 1021362.525242 units
+[  ]    ---- : | 1 kg = 32739701871.072533 units
+[  ]    ---- : | 1 K = 1.000000 units
+[  ]    ---- : | 1 x = 1.000000 units
+[  ]    ---- : | 1 y = 1.000000 units
+[  ]    ---- : | 1 z = 1.000000 units
+[  ]    ---- : | 1 A = 1.000000 units
+[  ]    ---- : | 1 t = 1.000000 units
+[  ]    ---- : \-----------------------------------------
+[  ]    ==== : Mesh size in config file: 1024x32x32
+[  ]    ---- : Global lattice size: 1024x32x32
+[  ]    ==== : Max region size: 1048576. Mesh size 1048576. Overhead:  0%
+[  ]    ---- : Local lattice size: 1024x32x32
+Hello allocator!
+[  ]    ---- :   Threads  |      Action
+[  ]    ---- :    32x8    | Primal , NoGlobals , WallInit
+[  ]    ---- :    32x16   | Tangent , NoGlobals , WallInit
+[  ]    ---- :    32x16   | Optimize , NoGlobals , WallInit
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , WallInit
+[  ]    ---- :    32x8    | Primal , IntegrateGlobals , WallInit
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , WallInit
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , WallInit
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , WallInit
+[  ]    ---- :    32x16   | Primal , OnlyObjective , WallInit
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , WallInit
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , WallInit
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , WallInit
+[  ]    ---- :    32x16   | Primal , NoGlobals , calcWall
+[  ]    ---- :    32x16   | Tangent , NoGlobals , calcWall
+[  ]    ---- :    32x16   | Optimize , NoGlobals , calcWall
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , calcWall
+[  ]    ---- :    32x16   | Primal , IntegrateGlobals , calcWall
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , calcWall
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , calcWall
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , calcWall
+[  ]    ---- :    32x16   | Primal , OnlyObjective , calcWall
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , calcWall
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , calcWall
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , calcWall
+[  ]    ---- :    32x16   | Primal , NoGlobals , PhaseInit
+[  ]    ---- :    32x16   | Tangent , NoGlobals , PhaseInit
+[  ]    ---- :    32x16   | Optimize , NoGlobals , PhaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , PhaseInit
+[  ]    ---- :    32x16   | Primal , IntegrateGlobals , PhaseInit
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , PhaseInit
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , PhaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , PhaseInit
+[  ]    ---- :    32x16   | Primal , OnlyObjective , PhaseInit
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , PhaseInit
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , PhaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , PhaseInit
+[  ]    ---- :    32x8    | Primal , NoGlobals , BaseInit
+[  ]    ---- :    32x16   | Tangent , NoGlobals , BaseInit
+[  ]    ---- :    32x16   | Optimize , NoGlobals , BaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , BaseInit
+[  ]    ---- :    32x8    | Primal , IntegrateGlobals , BaseInit
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , BaseInit
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , BaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , BaseInit
+[  ]    ---- :    32x16   | Primal , OnlyObjective , BaseInit
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , BaseInit
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , BaseInit
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , BaseInit
+[  ]    ---- :    32x8    | Primal , NoGlobals , calcPhase
+[  ]    ---- :    32x16   | Tangent , NoGlobals , calcPhase
+[  ]    ---- :    32x16   | Optimize , NoGlobals , calcPhase
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , calcPhase
+[  ]    ---- :    32x8    | Primal , IntegrateGlobals , calcPhase
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , calcPhase
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , calcPhase
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , calcPhase
+[  ]    ---- :    32x16   | Primal , OnlyObjective , calcPhase
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , calcPhase
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , calcPhase
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , calcPhase
+[  ]    ---- :    32x8    | Primal , NoGlobals , BaseIter
+[  ]    ---- :    32x16   | Tangent , NoGlobals , BaseIter
+[  ]    ---- :    32x16   | Optimize , NoGlobals , BaseIter
+[  ]    ---- :    32x16   | SteadyAdjoint , NoGlobals , BaseIter
+[  ]    ---- :    32x8    | Primal , IntegrateGlobals , BaseIter
+[  ]    ---- :    32x16   | Tangent , IntegrateGlobals , BaseIter
+[  ]    ---- :    32x16   | Optimize , IntegrateGlobals , BaseIter
+[  ]    ---- :    32x16   | SteadyAdjoint , IntegrateGlobals , BaseIter
+[  ]    ---- :    32x16   | Primal , OnlyObjective , BaseIter
+[  ]    ---- :    32x16   | Tangent , OnlyObjective , BaseIter
+[  ]    ---- :    32x16   | Optimize , OnlyObjective , BaseIter
+[  ]    ---- :    32x16   | SteadyAdjoint , OnlyObjective , BaseIter
+[  ]    #### : [0] Cumulative allocation of 1988727552 b (2.0 GB)
+[  ]    ---- : Creating geom size:1048576
+[  ]    #### : Setting output path to: constrictedChannel
+[  ]    #### : Setting output path to: /scratch/eait/uqilenan/constrictedChannel
+[ 0] warning ! Disambiguous unit: "mm". Interpreting "m" as "mili"
+[  ]    ==== : Unknown setting resolution with gauge
+[  ]    ==== : Unknown setting nu with gauge
+[  ]    ==== : Unknown setting rho with gauge
+[  ]    ---- : loading geometry ...
+Region: 1024x32x32 + 0,0,0
+[  ]    ---- : Reading file ./constrictedWetParts.dat
+Region: 1024x32x32 + 0,0,0
+[  ]    ---- : Reading file ./constricted.dat
+[  ]    ---- : Setting number of zones to 4
+[  ]    ---- : Setting Density_h to 997kg/m3 (1.000000)
+[  ]    ---- : [0] Settings [High density] to 1.000000
+[  ]    ---- : Setting Density_l to 1.184kg/m3 (0.001188)
+[  ]    ---- : [0] Settings [Low  density] to 0.001188
+[  ]    ---- : Setting Viscosity_h to 8.917e-7m2/s (0.000892)
+[  ]    ---- : [0] Settings [kinematic viscosity] to 0.000892
+[  ]    ---- : [0] Settings [relaxation time (high density fluid)] to 0.002675
+[  ]    ---- : Setting Viscosity_l to 1.552e-5m2/s (0.015520)
+[  ]    ---- : [0] Settings [kinematic viscosity] to 0.015520
+[  ]    ---- : [0] Settings [relaxation time (low density fluid)] to 0.046560
+[  ]    ---- : Setting PhaseField_h to 1 (1.000000)
+[  ]    ---- : [0] Settings [PhaseField in Liquid] to 1.000000
+[  ]    ---- : Setting PhaseField_l to 0 (0.000000)
+[  ]    ---- : [0] Settings [PhaseField gas] to 0.000000
+[  ]    ---- : Setting PhaseField in zone  (-1) to 0 (0.000000)
+[  ]    ---- : Setting PhaseField in zone wetting (1) to 1 (1.000000)
+[  ]    ---- : Setting PhaseField in zone outlet (3) to 0 (0.000000)
+[  ]    ---- : Setting PhaseField in zone inlet (2) to 1 (1.000000)
+[  ]    ---- : Setting Uavg in zone  (-1) to 0m/s (0.000000)
+[  ]    ---- : Setting Uavg in zone inlet (2) to 0m/s (0.000000)
+[  ]    ---- : Setting developedPipeFlow_X to 1 (1.000000)
+[  ]    ---- : [0] Settings [set greater than 0 for fully developed pipe flow in the domain (x-direction)] to 1.000000
+[  ]    ---- : Setting pipeRadius to 16 (16.000000)
+[  ]    ---- : [0] Settings [radius of pipe for developed pipe flow] to 16.000000
+[  ]    ---- : Setting pipeCentre_Y to 16 (16.000000)
+[  ]    ---- : [0] Settings [pipe centre Y co-ord for developed pipe flow] to 16.000000
+[  ]    ---- : Setting pipeCentre_Z to 16 (16.000000)
+[  ]    ---- : [0] Settings [pipe centre Z co-ord for developed pipe flow] to 16.000000
+[  ]    ---- : Setting Pressure in zone  (-1) to 0Pa (0.000000)
+[  ]    ---- : Setting Pressure in zone wetting (1) to -100Pa (-0.000098)
+[  ]    ---- : Setting M to 0.1 (0.100000)
+[  ]    ---- : [0] Settings [Mobility] to 0.100000
+[  ]    ---- : [0] Settings [one over relaxation time (phase field)] to 1.250000
+[  ]    ---- : Setting IntWidth to 5 (5.000000)
+[  ]    ---- : [0] Settings [Anti-diffusivity coeff] to 5.000000
+[  ]    ---- : Setting sigma to 72e-3kg/s2 (0.002260)
+[  ]    ---- : [0] Settings [surface tension] to 0.002260
+[  ]    ---- : Setting radAngle in zone  (-1) to 71d (1.239184)
+[ 0] WARNING ! Zone-specific settings in zone 0 were overwritten from 1.570796 to 1.239184
+[  ]    ---- : Initializing Lattice ...
+[  ]      4.5 MLBUps      8.22 GB/s [====================]  0s[  ]    ---- : Setting action Solve at 5.000000 iterations
+[  ]    163.8 MLBUps    301.73 GB/s [================    ]  0s[  ]    ---- :    182.2 MLBUps    335.69 GB/s [====================]
+[  ]    ---- : Callback VTK with no Iterations attribute
+[  ]    ---- :        5 it writing vtk
+[  ]    ---- : loading geometry ...
+[  ]    ---- : Callback VTK with no Iterations attribute
+[  ]    ---- :        5 it writing vtk
+[  ]    ---- : Setting action Control at 400000.000000 iterations
+[  ]    ---- : Setting iterations for time-dependent settings at 400000
+[ 0] warning ! clearing old control
+[  ]    ---- : Read 400000 rows from ./my/IJL_velocityRamp.csv file
+[  ]    ---- : Getting time from context with a scale of 1.000000 (*1.000000)
+[  ]    ---- : Setting action Control at 400000.000000 iterations
+[  ]    ---- : Getting velocity from context with a scale of 0.031290 (*1.000000)
+[  ]    ---- : Setting action Solve at 400000.000000 iterations
+[  ]    ---- : Setting callback Failcheck at 4000.000000 iterations
+[  ]    ---- : Adding Failcheck to the solver hands
+[  ]    ---- : Setting callback VTK at 20000.000000 iterations
+[  ]    ---- : Adding VTK to the solver hands
+[  ]      8.0 MLBUps     14.70 GB/s [                    ]  2s[  ]    124.8 MLBUps    229.88 GB/s [                    ]  2s[  ]    126.4 MLBUps    232.78 GB/s [                    ]  3s[  ]    127.2 MLBUps    234.30 GB/s [=                   ]  4s[  ]    127.9 MLBUps    235.54 GB/s [=                   ]  5s[  ]    128.0 MLBUps    235.72 GB/s [==                  ]  6s[  ]    127.8 MLBUps    235.38 GB/s [===                 ]  7s[  ]    127.9 MLBUps    235.61 GB/s [===                 ]  8s[  ]    127.9 MLBUps    235.57 GB/s [====                ]  9s[  ]    128.9 MLBUps    237.35 GB/s [====                ] 10s[  ]    128.6 MLBUps    236.85 GB/s [=====               ] 11s[  ]    128.1 MLBUps    236.03 GB/s [======              ] 12s[  ]    128.9 MLBUps    237.52 GB/s [======              ] 13s[  ]    127.7 MLBUps    235.18 GB/s [=======             ] 14s[  ]    129.0 MLBUps    237.58 GB/s [========            ] 15s[  ]    127.9 MLBUps    235.59 GB/s [========            ] 16s[  ]    128.9 MLBUps    237.40 GB/s [=========           ] 17s[  ]    128.8 MLBUps    237.21 GB/s [=========           ] 18s[  ]    128.9 MLBUps    237.50 GB/s [==========          ] 19s[  ]    128.4 MLBUps    236.47 GB/s [===========         ] 20s[  ]    128.1 MLBUps    235.94 GB/s [===========         ] 21s[  ]    128.1 MLBUps    235.96 GB/s [============        ] 22s[  ]    128.3 MLBUps    236.25 GB/s [============        ] 23s[  ]    128.0 MLBUps    235.70 GB/s [=============       ] 24s[  ]    128.2 MLBUps    236.18 GB/s [==============      ] 25s[  ]    128.3 MLBUps    236.28 GB/s [==============      ] 26s[  ]    128.7 MLBUps    237.10 GB/s [===============     ] 27s[  ]    128.2 MLBUps    236.13 GB/s [===============     ] 28s[  ]    128.5 MLBUps    236.65 GB/s [================    ] 29s[  ]    128.1 MLBUps    235.88 GB/s [=================   ] 30s[  ]    129.0 MLBUps    237.65 GB/s [=================   ] 31s[  ]    128.8 MLBUps    237.22 GB/s [==================  ] 32s[  ]    129.5 MLBUps    238.61 GB/s [=================== ] 33s[  ]    129.0 MLBUps    237.59 GB/s [=================== ] 34s[  ]    ---- :    128.8 MLBUps    237.27 GB/s [====================]
+[  ]    128.2 MLBUps    236.17 GB/s [                    ]  0s[  ]    128.7 MLBUps    237.01 GB/s [=                   ]  1s[  ]    128.9 MLBUps    237.35 GB/s [=                   ]  2s[  ]    128.7 MLBUps    237.11 GB/s [==                  ]  3s[  ]    128.4 MLBUps    236.60 GB/s [===                 ]  4s[  ]    128.4 MLBUps    236.53 GB/s [===                 ]  5s[  ]    128.5 MLBUps    236.66 GB/s [====                ]  6s[  ]    129.2 MLBUps    237.97 GB/s [====                ]  7s[  ]    128.6 MLBUps    236.81 GB/s [=====               ]  8s[  ]    129.0 MLBUps    237.62 GB/s [======              ]  9s[  ]    128.1 MLBUps    235.96 GB/s [======              ] 10s[  ]    128.7 MLBUps    237.02 GB/s [=======             ] 11s[  ]    128.3 MLBUps    236.41 GB/s [=======             ] 12s[  ]    128.3 MLBUps    236.30 GB/s [========            ] 13s[  ]    128.7 MLBUps    237.08 GB/s [=========           ] 14s[  ]    128.7 MLBUps    237.04 GB/s [=========           ] 15s[  ]    129.5 MLBUps    238.53 GB/s [==========          ] 16s[  ]    129.0 MLBUps    237.63 GB/s [==========          ] 17s[  ]    128.8 MLBUps    237.32 GB/s [===========         ] 18s[  ]    128.4 MLBUps    236.47 GB/s [============        ] 19s[  ]    127.8 MLBUps    235.40 GB/s [============        ] 20s[  ]    127.7 MLBUps    235.26 GB/s [=============       ] 21s[  ]    127.8 MLBUps    235.45 GB/s [==============      ] 22s[  ]    128.6 MLBUps    236.86 GB/s [==============      ] 23s[  ]    128.6 MLBUps    236.90 GB/s [===============     ] 24s[  ]    127.7 MLBUps    235.31 GB/s [===============     ] 25s[  ]    129.0 MLBUps    237.63 GB/s [================    ] 26s[  ]    128.7 MLBUps    237.08 GB/s [=================   ] 27s[  ]    128.9 MLBUps    237.41 GB/s [=================   ] 28s[  ]    129.1 MLBUps    237.73 GB/s [==================  ] 29s[  ]    129.0 MLBUps    237.68 GB/s [==================  ] 30s[  ]    128.2 MLBUps    236.19 GB/s [=================== ] 31s[  ]    ---- :    128.8 MLBUps    237.23 GB/s [====================]
+[  ]    128.8 MLBUps    237.33 GB/s [                    ]  0s[  ]    129.1 MLBUps    237.72 GB/s [=                   ]  1s[  ]    129.6 MLBUps    238.73 GB/s [=                   ]  2s[  ]    128.6 MLBUps    236.85 GB/s [==                  ]  3s[  ]    128.4 MLBUps    236.52 GB/s [===                 ]  4s[  ]    128.9 MLBUps    237.39 GB/s [===                 ]  5s[  ]    128.9 MLBUps    237.39 GB/s [====                ]  6s[  ]    128.6 MLBUps    236.79 GB/s [====                ]  7s[  ]    128.5 MLBUps    236.72 GB/s [=====               ]  8s[  ]    128.9 MLBUps    237.36 GB/s [======              ]  9s[  ]    128.6 MLBUps    236.97 GB/s [======              ] 10s[  ]    128.2 MLBUps    236.20 GB/s [=======             ] 11s[  ]    128.7 MLBUps    237.10 GB/s [=======             ] 12s[  ]    129.1 MLBUps    237.74 GB/s [========            ] 13s[  ]    128.6 MLBUps    236.93 GB/s [=========           ] 14s[  ]    128.2 MLBUps    236.17 GB/s [=========           ] 15s[  ]    128.2 MLBUps    236.20 GB/s [==========          ] 16s[  ]    128.9 MLBUps    237.38 GB/s [===========         ] 17s[  ]    127.6 MLBUps    235.09 GB/s [===========         ] 18s[  ]    128.1 MLBUps    236.02 GB/s [============        ] 19s[  ]    128.7 MLBUps    237.07 GB/s [============        ] 20s[  ]    128.7 MLBUps    236.99 GB/s [=============       ] 21s[  ]    129.2 MLBUps    237.90 GB/s [==============      ] 22s[  ]    128.6 MLBUps    236.89 GB/s [==============      ] 23s[  ]    128.6 MLBUps    236.81 GB/s [===============     ] 24s[  ]    128.1 MLBUps    236.05 GB/s [===============     ] 25s[  ]    129.4 MLBUps    238.29 GB/s [================    ] 26s[  ]    128.4 MLBUps    236.46 GB/s [=================   ] 27s[  ]    128.1 MLBUps    235.93 GB/s [=================   ] 28s[  ]    128.3 MLBUps    236.26 GB/s [==================  ] 29s[  ]    128.9 MLBUps    237.36 GB/s [==================  ] 30s[  ]    128.4 MLBUps    236.59 GB/s [=================== ] 31s[  ]    ---- :    129.2 MLBUps    237.91 GB/s [====================]
+[  ]    128.2 MLBUps    236.20 GB/s [                    ]  0s[  ]    128.7 MLBUps    237.16 GB/s [=                   ]  1s[  ]    128.7 MLBUps    237.12 GB/s [=                   ]  2s[  ]    128.4 MLBUps    236.43 GB/s [==                  ]  3s[  ]    128.3 MLBUps    236.32 GB/s [===                 ]  4s[  ]    128.2 MLBUps    236.17 GB/s [===                 ]  5s[  ]    128.5 MLBUps    236.76 GB/s [====                ]  6s[  ]    128.7 MLBUps    237.13 GB/s [====                ]  7s[  ]    129.0 MLBUps    237.67 GB/s [=====               ]  8s[  ]    128.2 MLBUps    236.14 GB/s [======              ]  9s[  ]    128.5 MLBUps    236.63 GB/s [======              ] 10s[  ]    127.3 MLBUps    234.43 GB/s [=======             ] 11s[  ]    128.9 MLBUps    237.42 GB/s [=======             ] 12s[  ]    128.1 MLBUps    235.99 GB/s [========            ] 13s[  ]    128.7 MLBUps    237.14 GB/s [=========           ] 14s[  ]    128.8 MLBUps    237.27 GB/s [=========           ] 15s[  ]    128.9 MLBUps    237.41 GB/s [==========          ] 16s[  ]    128.6 MLBUps    236.93 GB/s [==========          ] 17s[  ]    128.1 MLBUps    235.90 GB/s [===========         ] 18s[  ]    129.0 MLBUps    237.54 GB/s [============        ] 19s[  ]    128.2 MLBUps    236.21 GB/s [============        ] 20s[  ]    128.2 MLBUps    236.21 GB/s [=============       ] 21s[  ]    128.4 MLBUps    236.58 GB/s [==============      ] 22s[  ]    128.8 MLBUps    237.31 GB/s [==============      ] 23s[  ]    128.3 MLBUps    236.42 GB/s [===============     ] 24s[  ]    128.4 MLBUps    236.59 GB/s [===============     ] 25s[  ]    129.2 MLBUps    237.90 GB/s [================    ] 26s[  ]    128.3 MLBUps    236.33 GB/s [=================   ] 27s[  ]    128.8 MLBUps    237.25 GB/s [=================   ] 28s[  ]    128.7 MLBUps    237.00 GB/s [==================  ] 29s[  ]    128.8 MLBUps    237.17 GB/s [==================  ] 30s[  ]    129.3 MLBUps    238.21 GB/s [=================== ] 31s[  ]    ---- :    128.3 MLBUps    236.35 GB/s [====================]
+[  ]    128.5 MLBUps    236.72 GB/s [                    ]  0s[  ]    128.8 MLBUps    237.31 GB/s [=                   ]  1s[  ]    129.2 MLBUps    237.90 GB/s [=                   ]  2s[  ]    128.8 MLBUps    237.29 GB/s [==                  ]  3s[  ]    128.7 MLBUps    237.14 GB/s [===                 ]  4s[  ]    128.4 MLBUps    236.46 GB/s [===                 ]  5s[  ]    129.3 MLBUps    238.16 GB/s [====                ]  6s[  ]    128.9 MLBUps    237.53 GB/s [====                ]  7s[  ]    128.3 MLBUps    236.41 GB/s [=====               ]  8s[  ]    128.2 MLBUps    236.06 GB/s [======              ]  9s[  ]    128.5 MLBUps    236.72 GB/s [======              ] 10s[  ]    128.4 MLBUps    236.49 GB/s [=======             ] 11s[  ]    128.9 MLBUps    237.38 GB/s [=======             ] 12s[  ]    128.6 MLBUps    236.79 GB/s [========            ] 13s[  ]    128.4 MLBUps    236.42 GB/s [=========           ] 14s[  ]    128.4 MLBUps    236.49 GB/s [=========           ] 15s[  ]    128.5 MLBUps    236.77 GB/s [==========          ] 16s[  ]    128.4 MLBUps    236.50 GB/s [===========         ] 17s[  ]    129.2 MLBUps    237.89 GB/s [===========         ] 18s[  ]    128.4 MLBUps    236.59 GB/s [============        ] 19s[  ]    128.2 MLBUps    236.10 GB/s [============        ] 20s[  ]    129.3 MLBUps    238.25 GB/s [=============       ] 21s[  ]    128.4 MLBUps    236.49 GB/s [==============      ] 22s[  ]    127.8 MLBUps    235.43 GB/s [==============      ] 23s[  ]    128.2 MLBUps    236.18 GB/s [===============     ] 24s[  ]    128.6 MLBUps    236.87 GB/s [===============     ] 25s[  ]    128.9 MLBUps    237.47 GB/s [================    ] 26s[  ]    129.4 MLBUps    238.28 GB/s [=================   ] 27s[  ]    128.6 MLBUps    236.96 GB/s [=================   ] 28s[  ]    128.2 MLBUps    236.13 GB/s [==================  ] 29s[  ]    128.4 MLBUps    236.48 GB/s [==================  ] 30s[  ]    128.2 MLBUps    236.07 GB/s [=================== ] 31s[  ]    ---- :    128.7 MLBUps    237.03 GB/s [====================]
+[  ]    ---- :    20005 it writing vtk
+[  ]     98.9 MLBUps    182.16 GB/s [                    ]  1s[  ]    128.1 MLBUps    235.95 GB/s [=                   ]  2s[  ]    128.3 MLBUps    236.28 GB/s [=                   ]  3s[  ]    128.6 MLBUps    236.91 GB/s [==                  ]  4s[  ]    128.8 MLBUps    237.20 GB/s [==                  ]  5s[  ]    127.8 MLBUps    235.40 GB/s [===                 ]  6s[  ]    128.2 MLBUps    236.18 GB/s [====                ]  7s[  ]    128.1 MLBUps    235.91 GB/s [====                ]  8s[  ]    128.6 MLBUps    236.85 GB/s [=====               ]  9s[  ]    128.6 MLBUps    236.87 GB/s [=====               ] 10s[  ]    129.3 MLBUps    238.15 GB/s [======              ] 11s[  ]    128.7 MLBUps    237.06 GB/s [=======             ] 12s[  ]    129.3 MLBUps    238.09 GB/s [=======             ] 13s[  ]    128.6 MLBUps    236.94 GB/s [========            ] 14s[  ]    128.5 MLBUps    236.74 GB/s [=========           ] 15s[  ]    128.5 MLBUps    236.65 GB/s [=========           ] 16s[  ]    128.6 MLBUps    236.81 GB/s [==========          ] 17s[  ]    128.9 MLBUps    237.41 GB/s [==========          ] 18s[  ]    128.4 MLBUps    236.49 GB/s [===========         ] 19s[  ]    128.3 MLBUps    236.39 GB/s [============        ] 20s[  ]    128.2 MLBUps    236.12 GB/s [============        ] 21s[  ]    129.2 MLBUps    237.95 GB/s [=============       ] 21s[  ]    128.8 MLBUps    237.33 GB/s [=============       ] 23s[  ]    128.3 MLBUps    236.40 GB/s [==============      ] 24s[  ]    128.2 MLBUps    236.17 GB/s [===============     ] 24s[  ]    128.1 MLBUps    235.94 GB/s [===============     ] 25s[  ]    128.9 MLBUps    237.44 GB/s [================    ] 26s[  ]    128.6 MLBUps    236.91 GB/s [================    ] 27s[  ]    127.9 MLBUps    235.57 GB/s [=================   ] 28s[  ]    128.3 MLBUps    236.36 GB/s [==================  ] 29s[  ]    129.1 MLBUps    237.83 GB/s [==================  ] 30s[  ]    128.9 MLBUps    237.39 GB/s [=================== ] 31s[  ]    ---- :    128.8 MLBUps    237.23 GB/s [====================]
+[  ]    128.7 MLBUps    237.05 GB/s [                    ]  0s[  ]    128.6 MLBUps    236.85 GB/s [=                   ]  1s[  ]    128.9 MLBUps    237.52 GB/s [=                   ]  2s[  ]    128.8 MLBUps    237.31 GB/s [==                  ]  3s[  ]    128.1 MLBUps    235.95 GB/s [===                 ]  4s[  ]    128.8 MLBUps    237.19 GB/s [===                 ]  5s[  ]    128.6 MLBUps    236.95 GB/s [====                ]  6s[  ]    128.6 MLBUps    236.89 GB/s [====                ]  7s[  ]    129.4 MLBUps    238.37 GB/s [=====               ]  8s[  ]    128.6 MLBUps    236.80 GB/s [======              ]  9s[  ]    128.6 MLBUps    236.81 GB/s [======              ] 10s[  ]    129.0 MLBUps    237.61 GB/s [=======             ] 11s[  ]    128.8 MLBUps    237.30 GB/s [=======             ] 12s[  ]    128.4 MLBUps    236.58 GB/s [========            ] 13s[  ]    128.5 MLBUps    236.73 GB/s [=========           ] 14s[  ]    129.0 MLBUps    237.69 GB/s [=========           ] 15s[  ]    128.8 MLBUps    237.30 GB/s [==========          ] 16s[  ]    129.2 MLBUps    238.03 GB/s [===========         ] 17s[  ]    128.7 MLBUps    237.08 GB/s [===========         ] 18s[  ]    129.1 MLBUps    237.78 GB/s [============        ] 19s[  ]    129.0 MLBUps    237.60 GB/s [============        ] 20s[  ]    128.7 MLBUps    237.09 GB/s [=============       ] 21s[  ]    129.3 MLBUps    238.11 GB/s [==============      ] 22s[  ]    128.9 MLBUps    237.49 GB/s [==============      ] 23s[  ]    128.8 MLBUps    237.27 GB/s [===============     ] 24s[  ]    128.7 MLBUps    237.06 GB/s [===============     ] 25s[  ]    129.0 MLBUps    237.54 GB/s [================    ] 26s[  ]    129.0 MLBUps    237.58 GB/s [=================   ] 27s[  ]    129.5 MLBUps    238.51 GB/s [=================   ] 28s[  ]    129.7 MLBUps    238.90 GB/s [==================  ] 29s[  ]    128.7 MLBUps    237.00 GB/s [=================== ] 30s[  ]    129.3 MLBUps    238.20 GB/s [=================== ] 31s[  ]    ---- :    129.2 MLBUps    238.08 GB/s [====================]
+slurmstepd: error: *** JOB 401772 ON gpunode-0-16 CANCELLED AT 2021-10-12T09:58:15 ***

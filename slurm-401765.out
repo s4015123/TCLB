@@ -1,0 +1,54 @@
+running on:
+gpunode-0-13
+Tue Oct 12 09:38:10 AEST 2021
+--------------------------------------------------------------------------
+By default, for Open MPI 4.0 and later, infiniband ports on a device
+are not used by default.  The intent is to use UCX for these devices.
+You can override this policy by setting the btl_openib_allow_ib MCA parameter
+to true.
+
+  Local host:              gpunode-0-13
+  Local adapter:           mlx5_0
+  Local port:              1
+
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+WARNING: There was an error initializing an OpenFabrics device.
+
+  Local host:   gpunode-0-13
+  Local device: mlx5_0
+--------------------------------------------------------------------------
+MPMD: TCLB: local:0/1 work:0/1 ---  connected to:
+[  ]    #### : -------------------------------------------------------------------------
+[  ]    #### : -  CLB version:        v6.5.0-96-g2cb4905                               -
+[  ]    #### : -        Model: d3q27_pf_velocity_q27_OutFlow                               -
+[  ]    #### : -------------------------------------------------------------------------
+[  ]    #### : Setting output path to: constrictedChannelMaster.xml
+[ 0]    ---- : Selecting device 0/1
+[ 0] error   ! Too many non-alpha-numeric characters in units: "<?%."
+terminate called after throwing an instance of 'std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >'
+[gpunode-0-13:28806] *** Process received signal ***
+[gpunode-0-13:28806] Signal: Aborted (6)
+[gpunode-0-13:28806] Signal code:  (-6)
+[gpunode-0-13:28806] [ 0] /lib64/libpthread.so.0(+0xf630)[0x7f5e0e719630]
+[gpunode-0-13:28806] [ 1] /lib64/libc.so.6(gsignal+0x37)[0x7f5e0e372387]
+[gpunode-0-13:28806] [ 2] /lib64/libc.so.6(abort+0x148)[0x7f5e0e373a78]
+[gpunode-0-13:28806] [ 3] /opt/ohpc/pub/compiler/gcc/7.3.0/lib64/libstdc++.so.6(_ZN9__gnu_cxx27__verbose_terminate_handlerEv+0x125)[0x7f5e0eed01e5]
+[gpunode-0-13:28806] [ 4] /opt/ohpc/pub/compiler/gcc/7.3.0/lib64/libstdc++.so.6(+0x8efd6)[0x7f5e0eecdfd6]
+[gpunode-0-13:28806] [ 5] /opt/ohpc/pub/compiler/gcc/7.3.0/lib64/libstdc++.so.6(+0x8f021)[0x7f5e0eece021]
+[gpunode-0-13:28806] [ 6] /opt/ohpc/pub/compiler/gcc/7.3.0/lib64/libstdc++.so.6(+0x8f263)[0x7f5e0eece263]
+[gpunode-0-13:28806] [ 7] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x47f5e6]
+[gpunode-0-13:28806] [ 8] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x47f9a6]
+[gpunode-0-13:28806] [ 9] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x48354e]
+[gpunode-0-13:28806] [10] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x415801]
+[gpunode-0-13:28806] [11] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x406f31]
+[gpunode-0-13:28806] [12] /lib64/libc.so.6(__libc_start_main+0xf5)[0x7f5e0e35e555]
+[gpunode-0-13:28806] [13] /clusterdata/uqilenan/TCLB/CLB/d3q27_pf_velocity_q27_OutFlow/main[0x414ed3]
+[gpunode-0-13:28806] *** End of error message ***
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun noticed that process rank 0 with PID 28806 on node gpunode-0-13 exited on signal 6 (Aborted).
+--------------------------------------------------------------------------

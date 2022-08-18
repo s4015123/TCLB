@@ -1,0 +1,9 @@
+
+set -e # exit on error
+module load cuda/11.3.0
+module load R
+module load openmpi
+module load gnu7/7.3.0
+
+cd /clusterdata/uqilenan/TCLB
+make -j 16 models/multiphase/d2q9_ShanChen
