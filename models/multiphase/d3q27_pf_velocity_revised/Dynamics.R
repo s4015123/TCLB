@@ -28,6 +28,7 @@ if (Options$OutFlow){
 		AddField( name=d$name, dx=-d$dx-1, dy=-d$dy, dz=-d$dz )
 	}
 	AddField(name="U",dx=c(-1,0,0))
+	AddField(name="U",dx=c(1,0,0))
 }
 ###############################
 ########THERMOCAPILLARY########

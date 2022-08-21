@@ -6,4 +6,4 @@ module load openmpi
 module load gnu7/7.3.0
 
 cd /clusterdata/uqilenan/TCLB
-make -j 16 models/multiphase/d2q9_ShanChen
+make -j 16 d3q27_pf_velocity_revised_q27_OutFlow

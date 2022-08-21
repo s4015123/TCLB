@@ -833,8 +833,13 @@ CudaDeviceFunction void EVelocity(){
 	U = VelocityX;
 	V = VelocityY;
 	W = VelocityZ;
-	if ( Uavg > 0 ){
+	if ( developedFlow > 0.1 ){
 		U = 6.0 * Uavg * Y*(HEIGHT - Y)/(HEIGHT*HEIGHT);
+		V = 0.0;
+		W = 0.0;
+	}
+	if ( developedPipeFlow_X > 0.1 ){
+		U = 2.0 * Uavg * (1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
 		V = 0.0;
 		W = 0.0;
 	}
