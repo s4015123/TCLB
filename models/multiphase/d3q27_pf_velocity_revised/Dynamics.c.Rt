@@ -475,7 +475,7 @@ CudaDeviceFunction void Init_distributions(){
 	real_t C0 = 0.5*(PhaseField_h - PhaseField_l);
 	PhaseF = PhaseF(0,0,0);
 	real_t d = Density_l + (Density_h-Density_l) * (PhaseF - PhaseField_l)/(PhaseField_h - PhaseField_l);
-    pnorm = Pressure / (d*cs2);
+   	pnorm = Pressure / (d*cs2);
 
 	// Gradients and phasefield normals:
 	real_t nx, ny, nz, magnPhi;
@@ -493,8 +493,8 @@ CudaDeviceFunction void Init_distributions(){
 	// Define Equilibrium, then initialise all da things
 	if (developedFlow > 0.1) {
 		U = 6.0 * Uavg * Y*(HEIGHT - Y)/(HEIGHT*HEIGHT);
-        V = 0.0;
-        W = 0.0;
+        		V = 0.0;
+        		W = 0.0;
 	} else if ( developedPipeFlow_X > 0.1 ){
 		U = 2.0 * Uavg * (1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
 		V = 0.0;
@@ -514,12 +514,12 @@ CudaDeviceFunction void Init_distributions(){
 	}
 
 	<?R
-    if (Options$q27){
-	#	C(h, w_h * phase * gammah - 0.5 * Fphi)
-		C(h, phase * gammah )
-    } else {
-		C(h, w_h * phase * gammah )
-    }
+    		if (Options$q27){
+			# C(h, w_h * phase * gammah - 0.5 * Fphi)
+			C(h, phase * gammah )
+    		} else {
+			C(h, w_h * phase * gammah )
+    		}
 	?>
 		
 	// ##### geq
@@ -796,7 +796,7 @@ CudaDeviceFunction void WVelocity(){
 		W = 0.0;
 	}
 	if ( developedPipeFlow_X > 0.1 ){
-		U = 2.0 * Uavg * (1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
+		U = 2.0 * Uavg * myMax(0, 1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
 		V = 0.0;
 		W = 0.0;
 	}
@@ -839,7 +839,7 @@ CudaDeviceFunction void EVelocity(){
 		W = 0.0;
 	}
 	if ( developedPipeFlow_X > 0.1 ){
-		U = 2.0 * Uavg * (1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
+		U = 2.0 * Uavg * myMax(0, 1 - pow( (sqrt(pow((Y-pipeCentre_Y),2) + pow((Z-pipeCentre_Z),2)) / pipeRadius),2));
 		V = 0.0;
 		W = 0.0;
 	}
